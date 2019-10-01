@@ -18,19 +18,27 @@ public class Player {
 	String firstName;
 	String lastName;
 	String email;
+	String country;
 	char gender;
-	
+	String photo;
 	GregorianCalendar birthDate;
+	
+	Player left;
+	Player right;
 
-	public Player(String id, String firstName, String lastName, String email, char gender,
+	public Player(String id, String firstName, String lastName, String email, String country, char gender, String photo,
 			GregorianCalendar birthDate) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.country = country;
 		this.gender = gender;
+		this.photo = photo;
 		this.birthDate = birthDate;
+		left = null;
+		right = null;
 	}
 
 	public String getId() {
@@ -65,12 +73,29 @@ public class Player {
 		this.email = email;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public char getGender() {
 		return gender;
 	}
 
 	public void setGender(char gender) {
 		this.gender = gender;
+	}
+	
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public GregorianCalendar getBirthDate() {
@@ -80,6 +105,24 @@ public class Player {
 	public void setBirthDate(GregorianCalendar birthDate) {
 		this.birthDate = birthDate;
 	}
+
+	public Player getLeft() {
+		return left;
+	}
+
+	public void setLeft(Player left) {
+		this.left = left;
+	}
+
+	public Player getRight() {
+		return right;
+	}
+
+	public void setRight(Player right) {
+		this.right = right;
+	}
+	
+	
 	
 	
 	
