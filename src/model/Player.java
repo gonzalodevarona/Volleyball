@@ -5,15 +5,16 @@
 * DEPARTAMENTO TIC - ALGORTIMOS Y PROGRAMACIÓN II
 * LAB IV
 * @AUTHOR: GONZALO DE VARONA <gonzalo.de1@correo.icesi.edu.co>
-* @LAST UPDATE DATE: 6 OCTOBER 2019
+* @LAST UPDATE DATE: 12 OCTOBER 2019
 * ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 */
 
 package model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class Player extends Person {
+public class Player extends Person  {
 	
 	Player prior;
 	Player next;
@@ -40,6 +41,15 @@ public class Player extends Person {
 	public void setNext(Player next) {
 		this.next = next;
 	}
+	
+	public String toString() {
+		String info = "PLAYER \n \n";
+		info += super.toString();
+		
+		return info;
+	}
+
+	
 	
 	
 	

@@ -5,12 +5,13 @@
 * DEPARTAMENTO TIC - ALGORTIMOS Y PROGRAMACIÓN II
 * LAB IV
 * @AUTHOR: GONZALO DE VARONA <gonzalo.de1@correo.icesi.edu.co>
-* @LAST UPDATE DATE: 6 OCTOBER 2019
+* @LAST UPDATE DATE: 12 OCTOBER 2019
 * ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 */
 
 package model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 public class Spectator extends Person  implements Comparable<Spectator>{
@@ -74,6 +75,28 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 			
 		}
 		
+	}
+	
+	public String searchSpectator(String thing) {
+		String n = "";
+		
+			if (thing.compareTo(getId()) == 0) {
+				n += toString();
+			} else if (thing.compareTo(getId()) > 0 && getRight() != null) {
+				n += getRight().searchSpectator(thing);
+			} else if(getLeft() != null){
+				n += getLeft().searchSpectator(thing);
+			} 
+			
+		
+		return n;
+	}
+	
+	public String toString() {
+		String info = "SPECTATOR \n \n";
+		info += super.toString();
+		
+		return info;
 	}
 	
 	

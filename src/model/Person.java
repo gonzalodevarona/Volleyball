@@ -5,13 +5,14 @@
 * DEPARTAMENTO TIC - ALGORTIMOS Y PROGRAMACIÓN II
 * LAB IV
 * @AUTHOR: GONZALO DE VARONA <gonzalo.de1@correo.icesi.edu.co>
-* @LAST UPDATE DATE: 6 OCTOBER 2019
+* @LAST UPDATE DATE: 12 OCTOBER 2019
 * ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 */
 
 package model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public abstract class Person implements Serializable{
@@ -103,6 +104,28 @@ public abstract class Person implements Serializable{
 
 	public void setBirthDate(GregorianCalendar birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public String toString() {
+		String info = "ID: "+getId()+"\n";
+		info += "Name: "+getFirstName()+"\n";
+		info += "Last name: "+getLastName()+"\n";
+		info += "Email: "+getEmail()+"\n";
+		info += "Country: "+getCountry()+"\n";
+		info += "Gender: "+getGender()+"\n";
+		info += "Birth date: "+date2String()+"\n";
+		
+		return info;
+	}
+	
+	public String date2String() {
+		Calendar date = getBirthDate();
+		int month = date.get(Calendar.MONTH) +1;
+		int day = date.get(Calendar.DATE);
+		int year = date.get(Calendar.YEAR);
+		String dates = day+"/"+month+"/"+year;
+		
+		return dates;
 	}
 	
 } //end of class
