@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
-public class Manager implements Serializable{
+public class Manager {
 	
 	private String name;
 	private String fileRoot;
@@ -92,7 +92,7 @@ public class Manager implements Serializable{
 				ObjectInputStream ois2 = new ObjectInputStream(new FileInputStream(file2));
 				
 				addSpectator2Tree((Spectator) ois.readObject());
-				setFirst((Player) ois.readObject());
+				setFirst((Player) ois2.readObject());
 				ois.close();
 				ois2.close();
 				done = true;
@@ -116,10 +116,10 @@ public class Manager implements Serializable{
 
 	public void saveChanges() throws IOException, IOException {
 		
-//		File file = new File(getFileRoot());
-//		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-//		oos.writeObject(getRoot());
-//		oos.close();
+		File file = new File(getFileRoot());
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+		oos.writeObject(getRoot());
+		oos.close();
 		
 		if (getFileFirst() != null) {
 			
@@ -149,8 +149,8 @@ public class Manager implements Serializable{
 		
 		while (line != null) {
 			++counter;
-			
-			words = line.split(";");
+			System.out.println(line);
+			words = line.split(",");
 			
 			
 			String id = words[0];
@@ -202,6 +202,42 @@ public class Manager implements Serializable{
 				match = null;
 			} else {match = match.getNext();
 			}
+			
+		}
+		
+		
+		return info;
+	}
+	
+	public String searchPlayersByCountry(String thing) {
+		String info = thing.toUpperCase()+"\n \n";
+		Player match = getFirst();
+		
+		while(match != null) {
+			if (match.getCountry().equalsIgnoreCase(thing)) {
+				info += match.getFirstName()+" "+match.getLastName()+"\n";
+				
+			} 
+			match = match.getNext();
+			
+			
+		}
+		
+		
+		return info;
+	}
+	
+	public String searchSpectatorsByCountry(String thing) {
+		String info = thing.toUpperCase()+"\n \n";
+		Player match = getFirst();
+		
+		while(match != null) {
+			if (match.getCountry().equalsIgnoreCase(thing)) {
+				info += match.getFirstName()+" "+match.getLastName()+"\n";
+				
+			} 
+			match = match.getNext();
+			
 			
 		}
 		

@@ -41,8 +41,10 @@ public class Main {
 		System.out.println("");
 		System.out.println("1. Search spectator by ID.");
 		System.out.println("2. Search player by ID");
-		System.out.println("3. Save program.");
-		System.out.println("4. QUIT PROGRAM.");
+		System.out.println("3. Search spectators by country");
+		System.out.println("4. Search players by country");
+		System.out.println("5. Save program.");
+		System.out.println("6. QUIT PROGRAM.");
 		System.out.println("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -70,7 +72,7 @@ public class Main {
 		System.out.println();
 		System.out.println();
 		System.out.println("Please type the spectator's relative path:");
-		System.out.println("Hint for relative path: data/Spectators.csv");
+		System.out.println("Hint for relative path: data/Base.csv");
 		System.out.println();
 		System.out.print("Answer: "); String path4This = reader.nextLine();
 		path4This = path4This.trim();
@@ -90,7 +92,7 @@ public class Main {
 		path4P = path4P.trim();
 		System.out.println();
 		
-		if (path4This.equalsIgnoreCase("data/Spectators.csv") && path4S.equalsIgnoreCase("data/SpectatorS") && path4P.equalsIgnoreCase("data/PlayerS")) {
+		if (path4This.equalsIgnoreCase("data/Base.csv") && path4S.equalsIgnoreCase("data/SpectatorS") && path4P.equalsIgnoreCase("data/PlayerS")) {
 			manager.setFileRoot(path4S);
 			manager.setFileFirst(path4P);
 			
@@ -104,6 +106,7 @@ public class Main {
 					manager.setFileRoot(path4This);
 					if (manager.loadSpectatorsPlainText()) {
 						System.out.println("File was successfully loaded thru reading plain text!");
+						manager.setFileRoot(path4S);
 					}
 				}
 					
@@ -116,7 +119,7 @@ public class Main {
 			}
 		
 
-			while (userInput != 4){
+			while (userInput != 6){
 
 				showMenuOptions();
 
@@ -140,13 +143,23 @@ public class Main {
 							break; 
 		
 		
-						//SAVE CHANGES
+						//SEARCH SPECTATORS BY COUNTRY
 						case 3: 
+							searchSpectatorsByCountry(); 
+							break;
+							
+						//SEARCH PLAYERS BY COUNTRY
+						case 4: 
+							searchPlayersByCountry(); 
+							break;
+							
+							//SAVE CHANGES
+						case 5: 
 							saveChanges(); 
 							break;
 							
 						//QUIT PROGRAM
-						case 4: 
+						case 6: 
 							theGoodbye(); 
 							break;
 							
@@ -237,6 +250,63 @@ public class Main {
 			} else {
 					System.out.println("");
 					System.out.println("ERROR: Invalid ID.");
+					System.out.println("");
+					}
+				
+		} catch (InputMismatchException e) {
+			System.out.println("");
+			System.out.println("ERROR: Wrong data type.");
+			System.out.println("");
+		}
+	}
+	
+	
+	public void searchPlayersByCountry() {
+		try {
+			System.out.println("Please type the country of the players: "); String stuff = reader.nextLine();
+			
+			if (!(stuff.equalsIgnoreCase(""))) {
+				
+				long first1 = System.nanoTime();
+				System.out.println();
+				System.out.println(manager.searchPlayersByCountry(stuff));
+				System.out.println();
+				long second2 = System.nanoTime();
+				long finalT2 = second2- first1;
+				System.out.println("Time for searching players from "+stuff+" in nanoseconds: "+finalT2);
+				System.out.println();
+			
+			} else {
+					System.out.println("");
+					System.out.println("ERROR: Invalid country.");
+					System.out.println("");
+					}
+				
+		} catch (InputMismatchException e) {
+			System.out.println("");
+			System.out.println("ERROR: Wrong data type.");
+			System.out.println("");
+		}
+	}
+	
+	public void searchSpectatorsByCountry() {
+		try {
+			System.out.println("Please type the country of the spectators: "); String stuff = reader.nextLine();
+			
+			if (!(stuff.equalsIgnoreCase(""))) {
+				
+				long first1 = System.nanoTime();
+				System.out.println();
+				System.out.println(manager.searchSpectatorsByCountry(stuff));
+				System.out.println();
+				long second2 = System.nanoTime();
+				long finalT2 = second2- first1;
+				System.out.println("Time for searching spectators from "+stuff+" in nanoseconds: "+finalT2);
+				System.out.println();
+			
+			} else {
+					System.out.println("");
+					System.out.println("ERROR: Invalid country.");
 					System.out.println("");
 					}
 				
