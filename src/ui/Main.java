@@ -43,8 +43,7 @@ public class Main {
 		System.out.println("2. Search player by ID");
 		System.out.println("3. Search spectators by country");
 		System.out.println("4. Search players by country");
-		System.out.println("5. Save program.");
-		System.out.println("6. QUIT PROGRAM.");
+		System.out.println("5. QUIT PROGRAM.");
 		System.out.println("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -78,48 +77,32 @@ public class Main {
 		path4This = path4This.trim();
 		System.out.println();
 		System.out.println();
-		System.out.println("Please type the spectator's relative path for saving spectators later:");
-		System.out.println("Hint for relative path: data/SpectatorS");
-		System.out.println();
-		System.out.print("Answer: "); String path4S = reader.nextLine();
-		path4S = path4S.trim();
-		System.out.println();
-		System.out.println();
-		System.out.println("Please type the player's relative path for saving players later:");
-		System.out.println("Hint for relative path: data/PlayerS");
-		System.out.println();
-		System.out.print("Answer: "); String path4P = reader.nextLine();
-		path4P = path4P.trim();
 		System.out.println();
 		
-		if (path4This.equalsIgnoreCase("data/Base.csv") && path4S.equalsIgnoreCase("data/SpectatorS") && path4P.equalsIgnoreCase("data/PlayerS")) {
-			manager.setFileRoot(path4S);
-			manager.setFileFirst(path4P);
+		if (path4This.equalsIgnoreCase("data/Base.csv")) {
+
 			
 			
 			try {
 				System.out.println("Please wait a few seconds... LOADING %");
 				System.out.println();
-				if (manager.loadChanges()) {
-					System.out.println("File was successfully loaded thru serialization!");
+				
+				if (manager.loadSpectatorsPlainText()) {
+					System.out.println("File was successfully loaded thru reading plain text!");
+					
 				} else {
-					manager.setFileRoot(path4This);
-					if (manager.loadSpectatorsPlainText()) {
-						System.out.println("File was successfully loaded thru reading plain text!");
-						manager.setFileRoot(path4S);
-					}
+					System.out.println("ERROR: File was not loaded");
 				}
+				
 					
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+			
 		
 
-			while (userInput != 6){
+			while (userInput != 5){
 
 				showMenuOptions();
 
@@ -153,13 +136,8 @@ public class Main {
 							searchPlayersByCountry(); 
 							break;
 							
-							//SAVE CHANGES
+							//QUIT PROGRAM
 						case 5: 
-							saveChanges(); 
-							break;
-							
-						//QUIT PROGRAM
-						case 6: 
 							theGoodbye(); 
 							break;
 							
@@ -181,7 +159,7 @@ public class Main {
 			}
 		} else {
 			System.out.println("");
-			System.out.println("ERROR: Invalid paths.");
+			System.out.println("ERROR: Invalid path.");
 			System.out.println("");
 			}
 		
@@ -190,17 +168,7 @@ public class Main {
 		
 	
 	
-	public void saveChanges() {
-		try {
-			manager.saveChanges();
-			System.out.println();
-			System.out.println("Changes have been sucessfully saved!");
-			System.out.println();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	
 
 	public void searchSpectator() {
@@ -320,7 +288,7 @@ public class Main {
 	
 
 		public void theGoodbye() {
-			saveChanges();
+			
 			
 			System.out.println("");
 			System.out.println("");

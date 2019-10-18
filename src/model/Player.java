@@ -11,7 +11,6 @@
 
 package model;
 
-import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 public class Player extends Person  {

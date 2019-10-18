@@ -11,7 +11,6 @@
 
 package model;
 
-import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 public class Spectator extends Person  implements Comparable<Spectator>{
@@ -95,6 +94,29 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 	public String toString() {
 		String info = "SPECTATOR \n \n";
 		info += super.toString();
+		
+		return info;
+	}
+	
+	
+	
+	public String searchByCountry(String countryR) {
+		String info = "";
+		
+		if (getCountry().equalsIgnoreCase(countryR)) {
+			info += getFirstName();
+			
+			
+			
+		}  if (getLeft() != null) {
+			info += getLeft().searchByCountry(countryR);
+		
+		} if (getRight() != null) {
+			info += getRight().searchByCountry(countryR);
+			
+		}
+		
+		
 		
 		return info;
 	}

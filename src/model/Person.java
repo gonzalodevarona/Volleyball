@@ -11,11 +11,10 @@
 
 package model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public abstract class Person implements Serializable{
+public abstract class Person {
 	
 	String id;
 	String firstName;

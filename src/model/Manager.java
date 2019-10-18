@@ -14,14 +14,9 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
@@ -80,27 +75,6 @@ public class Manager {
 	}
 
 
-	public boolean loadChanges() throws FileNotFoundException, IOException, ClassNotFoundException {
-		boolean done = false;
-		
-		File file = new File(getFileRoot());
-		if (getFileFirst() != null) {
-			File file2 = new File(getFileFirst());
-			
-			if (file.exists() && file2.exists()) {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-				ObjectInputStream ois2 = new ObjectInputStream(new FileInputStream(file2));
-				
-				addSpectator2Tree((Spectator) ois.readObject());
-				setFirst((Player) ois2.readObject());
-				ois.close();
-				ois2.close();
-				done = true;
-			}
-		}
-		
-		return done;
-	}
 	
 	public void addSpectator2Tree(Spectator thing) {
 		
@@ -114,23 +88,7 @@ public class Manager {
 	}
 
 
-	public void saveChanges() throws IOException, IOException {
-		
-		File file = new File(getFileRoot());
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-		oos.writeObject(getRoot());
-		oos.close();
-		
-		if (getFileFirst() != null) {
-			
-			File file2 = new File(getFileFirst());
-			ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream(file2));
-			oos2.writeObject(getFirst());
-			oos2.close();
-		}
-		
-		
-	}
+	
 	
 	public boolean loadSpectatorsPlainText() throws FileNotFoundException, IOException {
 		boolean status = false;
@@ -229,19 +187,13 @@ public class Manager {
 	
 	public String searchSpectatorsByCountry(String thing) {
 		String info = thing.toUpperCase()+"\n \n";
-		Player match = getFirst();
-		
-		while(match != null) {
-			if (match.getCountry().equalsIgnoreCase(thing)) {
-				info += match.getFirstName()+" "+match.getLastName()+"\n";
-				
-			} 
-			match = match.getNext();
+		Spectator match = getRoot();
 			
+		if (match != null ) {
+			info += match.searchByCountry(thing);
 			
-		}
-		
-		
+		} 
+
 		return info;
 	}
 	
