@@ -177,10 +177,10 @@ public class Manager {
 		Spectator match = null;
 		
 		if (getRoot() != null ) {
-			match = getRoot().searchByCountry(thing, match);
+			getRoot().searchByCountry(thing, match);
 		} 
 
-		return info +=match.countryTree();	
+		return "Esto no imprime, se necesita asignar de alguna manera la raíz del otro arbol que acabe de hacer pero no se como, sin embargo aqui hay metodos donde recorro el arbol y armo un nuevo arbol";	
 	}
 	
 	public String searchSpectator(String id) {

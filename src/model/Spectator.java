@@ -103,7 +103,7 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 	
 	
 	
-	public Spectator searchByCountry(String countryR, Spectator inMatter) {
+	public void searchByCountry(String countryR, Spectator inMatter) {
 		
 		
 		if (getCountry().equalsIgnoreCase(countryR)) {
@@ -111,10 +111,12 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 				inMatter = new Spectator();
 				inMatter.setFirstName(this.firstName);
 				inMatter.setLastName(this.lastName);
+				inMatter.setId(this.id);
 			} else {
 				Spectator temp = new Spectator();
 				temp.setFirstName(this.firstName);
 				temp.setLastName(this.lastName);
+				temp.setId(this.id);
 				inMatter.addSpectator(temp);
 			}
 		}
@@ -128,8 +130,10 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 			getRight().searchByCountry(countryR, inMatter);
 		}
 		
+	
 		
-		return inMatter;
+		
+		
 		
 	}
 	public String countryTree() {
