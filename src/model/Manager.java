@@ -24,7 +24,6 @@ public class Manager {
 	
 	private String name;
 	private String fileRoot;
-	private String fileFirst;
 	private Player first;
 	private Spectator root;
 	
@@ -41,19 +40,7 @@ public class Manager {
 	public void setFileRoot(String fileRoot) {
 		this.fileRoot = fileRoot;
 	}
-	
-	
-	
-
-	public String getFileFirst() {
-		return fileFirst;
-	}
-
-
-	public void setFileFirst(String fileFirst) {
-		this.fileFirst = fileFirst;
-	}
-
+	 
 
 	public Player getFirst() {
 		return first;
@@ -108,7 +95,7 @@ public class Manager {
 		while (line != null) {
 			++counter;
 			System.out.println(line);
-			words = line.split(",");
+			words = line.split(";");
 			
 			
 			String id = words[0];
@@ -187,14 +174,13 @@ public class Manager {
 	
 	public String searchSpectatorsByCountry(String thing) {
 		String info = thing.toUpperCase()+"\n \n";
-		Spectator match = getRoot();
-			
-		if (match != null ) {
-			info += match.searchByCountry(thing);
-			
+		Spectator match = null;
+		
+		if (getRoot() != null ) {
+			match = getRoot().searchByCountry(thing, match);
 		} 
 
-		return info;
+		return info +=match.countryTree();	
 	}
 	
 	public String searchSpectator(String id) {

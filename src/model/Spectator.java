@@ -24,6 +24,9 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 		this.left = null;
 		this.right = null;
 	}
+	public Spectator() {
+		super();
+	}
 
 	public Spectator getLeft() {
 		return left;
@@ -57,22 +60,21 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 	}
 	
 	public void addSpectator(Spectator thing) {
-		if (compareTo(thing)>0) {
+		if (compareTo(thing)<0) {
 			if (right != null) {
 				right.addSpectator(thing);
 			} else {
 				setRight(thing);
 			}
 			
-		} else if (compareTo(thing)<0){
+		} 
+		if (compareTo(thing)>0){
 			if (left != null) {
 				left.addSpectator(thing);
 			} else {
 				setLeft(thing);
 			}
-		} else {
-			
-		}
+		} 
 		
 	}
 	
@@ -91,6 +93,7 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 		return n;
 	}
 	
+	
 	public String toString() {
 		String info = "SPECTATOR \n \n";
 		info += super.toString();
@@ -100,22 +103,54 @@ public class Spectator extends Person  implements Comparable<Spectator>{
 	
 	
 	
-	public String searchByCountry(String countryR) {
-		String info = "";
+	public Spectator searchByCountry(String countryR, Spectator inMatter) {
+		
 		
 		if (getCountry().equalsIgnoreCase(countryR)) {
-			info += getFirstName();
+			if (inMatter == null) {
+				inMatter = new Spectator();
+				inMatter.setFirstName(this.firstName);
+				inMatter.setLastName(this.lastName);
+			} else {
+				Spectator temp = new Spectator();
+				temp.setFirstName(this.firstName);
+				temp.setLastName(this.lastName);
+				inMatter.addSpectator(temp);
+			}
+		}
 			
-			
-			
-		}  if (getLeft() != null) {
-			info += getLeft().searchByCountry(countryR);
+
 		
-		} if (getRight() != null) {
-			info += getRight().searchByCountry(countryR);
-			
+		if (getLeft() != null) {
+			getLeft().searchByCountry(countryR, inMatter);
+		}
+		if (getRight() != null) {
+			getRight().searchByCountry(countryR, inMatter);
 		}
 		
+		
+		return inMatter;
+		
+	}
+	public String countryTree() {
+		String info = getFirstName()+"\n";
+		
+		if (getLeft() != null ) {
+		info += getLeft().getFirstName();
+		}
+		if (getRight() != null) {
+			info += getRight().getFirstName();
+		}
+	
+		info += "\n";
+	
+		if (getLeft() != null ) {
+			info += getLeft().countryTree();
+		}
+		if (getRight() != null) {
+			info += getRight().countryTree();
+		}
+
 		
 		
 		return info;

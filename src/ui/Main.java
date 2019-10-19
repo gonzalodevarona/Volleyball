@@ -13,6 +13,7 @@
 package ui;
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import model.*;
@@ -75,6 +76,7 @@ public class Main {
 		System.out.println();
 		System.out.print("Answer: "); String path4This = reader.nextLine();
 		path4This = path4This.trim();
+		manager.setFileRoot(path4This);
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -152,6 +154,11 @@ public class Main {
 				} catch(InputMismatchException e){
 					System.out.println();
 					System.out.print("ERROR: Wrong data type.");
+					reader.nextLine();
+					System.out.println();
+				} catch(NoSuchElementException e){
+					System.out.println();
+					System.out.print("ERROR: I don't know why this happens but it is ok.");
 					reader.nextLine();
 					System.out.println();
 				}

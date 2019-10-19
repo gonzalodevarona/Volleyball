@@ -39,6 +39,10 @@ public abstract class Person {
 		this.birthDate = birthDate;
 		
 	}
+	
+	public Person() {
+		
+	}
 
 	public String getId() {
 		return id;
