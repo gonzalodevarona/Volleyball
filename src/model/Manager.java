@@ -94,7 +94,7 @@ public class Manager {
 		
 		while (line != null) {
 			++counter;
-			System.out.println(line);
+			
 			words = line.split(";");
 			
 			
